@@ -1,0 +1,268 @@
+{
+  "Bollaram Industrial Area, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 55318,
+    "pm25_missing_rows": 14858,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 55318,
+      "PM10 (\u00b5g/m\u00b3)": 56486,
+      "NO (\u00b5g/m\u00b3)": 60045,
+      "NO2 (\u00b5g/m\u00b3)": 60583,
+      "NOx (ppb)": 61435,
+      "NH3 (\u00b5g/m\u00b3)": 60583,
+      "SO2 (\u00b5g/m\u00b3)": 59854,
+      "CO (mg/m\u00b3)": 61548,
+      "Ozone (\u00b5g/m\u00b3)": 61493
+    },
+    "duplicate_timestamps": 0
+  },
+  "Central University, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 59104,
+    "pm25_missing_rows": 11072,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 59104,
+      "PM10 (\u00b5g/m\u00b3)": 55996,
+      "NO (\u00b5g/m\u00b3)": 60435,
+      "NO2 (\u00b5g/m\u00b3)": 59735,
+      "NOx (ppb)": 60079,
+      "NH3 (\u00b5g/m\u00b3)": 59746,
+      "SO2 (\u00b5g/m\u00b3)": 60111,
+      "CO (mg/m\u00b3)": 60882,
+      "Ozone (\u00b5g/m\u00b3)": 59878
+    },
+    "duplicate_timestamps": 0
+  },
+  "ECIL Kapra, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 58454,
+    "pm25_missing_rows": 11722,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 58454,
+      "PM10 (\u00b5g/m\u00b3)": 58237,
+      "NO (\u00b5g/m\u00b3)": 62280,
+      "NO2 (\u00b5g/m\u00b3)": 62369,
+      "NOx (ppb)": 52238,
+      "NH3 (\u00b5g/m\u00b3)": 62089,
+      "SO2 (\u00b5g/m\u00b3)": 52421,
+      "CO (mg/m\u00b3)": 62256,
+      "Ozone (\u00b5g/m\u00b3)": 62257
+    },
+    "duplicate_timestamps": 0
+  },
+  "ICRISAT Patancheru, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 62798,
+    "pm25_missing_rows": 7378,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 62798,
+      "PM10 (\u00b5g/m\u00b3)": 63769,
+      "NO (\u00b5g/m\u00b3)": 62095,
+      "NO2 (\u00b5g/m\u00b3)": 61368,
+      "NOx (ppb)": 64225,
+      "NH3 (\u00b5g/m\u00b3)": 61307,
+      "SO2 (\u00b5g/m\u00b3)": 62910,
+      "CO (mg/m\u00b3)": 64635,
+      "Ozone (\u00b5g/m\u00b3)": 61852
+    },
+    "duplicate_timestamps": 0
+  },
+  "IDA Pashamylaram, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 41442,
+    "pm25_missing_rows": 28734,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 41442,
+      "PM10 (\u00b5g/m\u00b3)": 41123,
+      "NO (\u00b5g/m\u00b3)": 43049,
+      "NO2 (\u00b5g/m\u00b3)": 43412,
+      "NOx (ppb)": 44310,
+      "NH3 (\u00b5g/m\u00b3)": 36468,
+      "SO2 (\u00b5g/m\u00b3)": 39543,
+      "CO (mg/m\u00b3)": 44482,
+      "Ozone (\u00b5g/m\u00b3)": 43385
+    },
+    "duplicate_timestamps": 0
+  },
+  "IITH Kandi, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 48516,
+    "pm25_missing_rows": 21660,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 48516,
+      "PM10 (\u00b5g/m\u00b3)": 48365,
+      "NO (\u00b5g/m\u00b3)": 51321,
+      "NO2 (\u00b5g/m\u00b3)": 51493,
+      "NOx (ppb)": 50552,
+      "NH3 (\u00b5g/m\u00b3)": 51692,
+      "SO2 (\u00b5g/m\u00b3)": 50294,
+      "CO (mg/m\u00b3)": 48312,
+      "Ozone (\u00b5g/m\u00b3)": 51028
+    },
+    "duplicate_timestamps": 0
+  },
+  "Kokapet, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 58635,
+    "pm25_missing_rows": 11541,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 58635,
+      "PM10 (\u00b5g/m\u00b3)": 54042,
+      "NO (\u00b5g/m\u00b3)": 59303,
+      "NO2 (\u00b5g/m\u00b3)": 59286,
+      "NOx (ppb)": 59236,
+      "NH3 (\u00b5g/m\u00b3)": 59475,
+      "SO2 (\u00b5g/m\u00b3)": 58470,
+      "CO (mg/m\u00b3)": 59005,
+      "Ozone (\u00b5g/m\u00b3)": 55276
+    },
+    "duplicate_timestamps": 0
+  },
+  "Kompally Municipal Office, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 56001,
+    "pm25_missing_rows": 14175,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 56001,
+      "PM10 (\u00b5g/m\u00b3)": 53316,
+      "NO (\u00b5g/m\u00b3)": 56448,
+      "NO2 (\u00b5g/m\u00b3)": 56403,
+      "NOx (ppb)": 55556,
+      "NH3 (\u00b5g/m\u00b3)": 56626,
+      "SO2 (\u00b5g/m\u00b3)": 51877,
+      "CO (mg/m\u00b3)": 53080,
+      "Ozone (\u00b5g/m\u00b3)": 54745
+    },
+    "duplicate_timestamps": 0
+  },
+  "Nacharam_TSIIC IALA, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 60161,
+    "pm25_missing_rows": 10015,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 60161,
+      "PM10 (\u00b5g/m\u00b3)": 58032,
+      "NO (\u00b5g/m\u00b3)": 60162,
+      "NO2 (\u00b5g/m\u00b3)": 60154,
+      "NOx (ppb)": 59897,
+      "NH3 (\u00b5g/m\u00b3)": 22209,
+      "SO2 (\u00b5g/m\u00b3)": 59940,
+      "CO (mg/m\u00b3)": 58080,
+      "Ozone (\u00b5g/m\u00b3)": 60166
+    },
+    "duplicate_timestamps": 0
+  },
+  "New Malakpet, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 59606,
+    "pm25_missing_rows": 10570,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 59606,
+      "PM10 (\u00b5g/m\u00b3)": 59466,
+      "NO (\u00b5g/m\u00b3)": 63736,
+      "NO2 (\u00b5g/m\u00b3)": 63700,
+      "NOx (ppb)": 63721,
+      "NH3 (\u00b5g/m\u00b3)": 63739,
+      "SO2 (\u00b5g/m\u00b3)": 62839,
+      "CO (mg/m\u00b3)": 63291,
+      "Ozone (\u00b5g/m\u00b3)": 64448
+    },
+    "duplicate_timestamps": 0
+  },
+  "Ramachandrapuram, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 50461,
+    "pm25_missing_rows": 19715,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 50461,
+      "PM10 (\u00b5g/m\u00b3)": 50485,
+      "NO (\u00b5g/m\u00b3)": 50393,
+      "NO2 (\u00b5g/m\u00b3)": 50366,
+      "NOx (ppb)": 50221,
+      "NH3 (\u00b5g/m\u00b3)": 50601,
+      "SO2 (\u00b5g/m\u00b3)": 47595,
+      "CO (mg/m\u00b3)": 48227,
+      "Ozone (\u00b5g/m\u00b3)": 48803
+    },
+    "duplicate_timestamps": 0
+  },
+  "Sanathnagar, Hyderabad": {
+    "rows": 68071,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:30:00+00:00",
+    "pm25_valid_rows": 67167,
+    "pm25_missing_rows": 904,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 67167,
+      "PM10 (\u00b5g/m\u00b3)": 0,
+      "NO (\u00b5g/m\u00b3)": 63083,
+      "NO2 (\u00b5g/m\u00b3)": 63013,
+      "NOx (ppb)": 65741,
+      "NH3 (\u00b5g/m\u00b3)": 0,
+      "SO2 (\u00b5g/m\u00b3)": 63274,
+      "CO (mg/m\u00b3)": 65712,
+      "Ozone (\u00b5g/m\u00b3)": 62374
+    },
+    "duplicate_timestamps": 0
+  },
+  "Somajiguda, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 50187,
+    "pm25_missing_rows": 19989,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 50187,
+      "PM10 (\u00b5g/m\u00b3)": 50195,
+      "NO (\u00b5g/m\u00b3)": 51512,
+      "NO2 (\u00b5g/m\u00b3)": 51618,
+      "NOx (ppb)": 51270,
+      "NH3 (\u00b5g/m\u00b3)": 51737,
+      "SO2 (\u00b5g/m\u00b3)": 49573,
+      "CO (mg/m\u00b3)": 51929,
+      "Ozone (\u00b5g/m\u00b3)": 51670
+    },
+    "duplicate_timestamps": 0
+  },
+  "Zoo Park, Hyderabad": {
+    "rows": 70176,
+    "first_timestamp": "2024-01-01T00:00:00+00:00",
+    "last_timestamp": "2025-12-31T23:45:00+00:00",
+    "pm25_valid_rows": 63214,
+    "pm25_missing_rows": 6962,
+    "pollutant_valid_rows": {
+      "PM2.5 (\u00b5g/m\u00b3)": 63214,
+      "PM10 (\u00b5g/m\u00b3)": 62843,
+      "NO (\u00b5g/m\u00b3)": 64608,
+      "NO2 (\u00b5g/m\u00b3)": 65169,
+      "NOx (ppb)": 65244,
+      "NH3 (\u00b5g/m\u00b3)": 64174,
+      "SO2 (\u00b5g/m\u00b3)": 62523,
+      "CO (mg/m\u00b3)": 65605,
+      "Ozone (\u00b5g/m\u00b3)": 64891
+    },
+    "duplicate_timestamps": 0
+  }
+}

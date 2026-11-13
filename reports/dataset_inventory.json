@@ -1,0 +1,208 @@
+{
+  "dataset_name": "Hyderabad Air Quality Station Feed",
+  "source": "OpenCity / CPCB",
+  "generated_on": "2026-11-13T13:28:38.692926+00:00",
+  "station_count": 14,
+  "sample_count": 980359,
+  "raw_resources": [
+    {
+      "file": "bollaram_industrial_area_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13649116,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "central_university_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13664330,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "ecil_kapra_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13583666,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "icrisat_patancheru_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13852767,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "ida_pashamylaram_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 12132019,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "iith_kandi_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 12964138,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "kokapet_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 11879194,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "kompally_municipal_office_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 14408476,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "nacharam_tsiic_iala_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13474419,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "new_malakpet_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13625375,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "ramachandrapuram_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 12669151,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "sanathnagar_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 12391367,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "somajiguda_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13057241,
+      "sampling_frequency": "15 minutes"
+    },
+    {
+      "file": "zoo_park_tspcb_15_minute_aqi_data_for_2024-25.csv",
+      "bytes": 13172070,
+      "sampling_frequency": "15 minutes"
+    }
+  ],
+  "legacy_aqi_resources": [
+    {
+      "file": "bollaram_industrial_area_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 294864,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "central_university_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 276078,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "ecil_kapra_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 80903,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "icrisat_patancheru_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 277726,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "ida_pashamylaram_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 277944,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "iith_kandi_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 80401,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "kokapet_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 80951,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "kompally_municipal_office_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 78920,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "nacharam_tsiic_iala_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 85433,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "new_malakpet_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 79803,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "ramachandrapuram_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 79480,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "sanathnagar_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 267289,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "somajiguda_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 83478,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    },
+    {
+      "file": "zoo_park_tspcb_aqi_data_2017-2023.csv",
+      "bytes": 272485,
+      "format": "monthly grid with day rows and 24 hourly AQI columns",
+      "integration": "preserved separately; not combined with 2024-2025 pollutant concentrations"
+    }
+  ],
+  "official_aqi_archive": {
+    "station_count": 14,
+    "observation_count": 388338,
+    "first_observation": "2017-02-02T00:00:00",
+    "last_observation": "2023-12-31T23:00:00",
+    "timestamps_are_local_unspecified_timezone": true,
+    "pollutant_breakdown_included": false
+  },
+  "station_map_locations": {
+    "source": "OpenStreetMap place search via Nominatim",
+    "mapped_stations": 14,
+    "precision": "Approximate locality or named-place reference; these are not verified air-monitor coordinates.",
+    "attribution": "Map data \u00a9 OpenStreetMap contributors"
+  },
+  "time_range": {
+    "start": "2024-01-01T00:00:00+00:00",
+    "end": "2025-12-31T23:45:00+00:00"
+  },
+  "station_names": [
+    "Sanathnagar, Hyderabad",
+    "New Malakpet, Hyderabad",
+    "Somajiguda, Hyderabad",
+    "IITH Kandi, Hyderabad",
+    "Kokapet, Hyderabad",
+    "ECIL Kapra, Hyderabad",
+    "Ramachandrapuram, Hyderabad",
+    "Nacharam_TSIIC IALA, Hyderabad",
+    "Kompally Municipal Office, Hyderabad",
+    "Central University, Hyderabad",
+    "ICRISAT Patancheru, Hyderabad",
+    "IDA Pashamylaram, Hyderabad",
+    "Bollaram Industrial Area, Hyderabad",
+    "Zoo Park, Hyderabad"
+  ],
+  "notes": [
+    "Source CSVs are 15-minute station feeds for Hyderabad from 2024-2025.",
+    "The older 2017-2023 files contain hourly AQI in a monthly grid format; they are preserved separately and not mixed with pollutant concentrations.",
+    "Historical AQI archive timestamps have no stated timezone and are displayed as source-local timestamps without timezone conversion.",
+    "The AQI archive does not include pollutant sub-index values, so no dominant pollutant is inferred from its AQI values.",
+    "Map markers use OpenStreetMap locality or named-place reference coordinates, not verified monitoring-device coordinates.",
+    "Map pollutant readings are each station's latest historical source observations, not live conditions or official place-wide AQI.",
+    "AirGuard Risk Index is a modelled exposure score for experience design; it is not an official AQI value."
+  ]
+}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071d18" />
+    <title>AirGuard | Breathe Smarter. Live Healthier.</title>
+    <meta name="description" content="Explore Hyderabad air monitoring data, station maps, PM2.5 forecasts, and thoughtful outdoor planning with AirGuard." />
+    <link rel="icon" type="image/svg+xml" href="/static/icons/icon-192.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script defer src="/static/app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">A</div>
+          <div>
+            <div class="brand-name">AirGuard</div>
+            <div class="brand-tag">Breathe Smarter. Live Healthier.</div>
+          </div>
+        </div>
+        <nav class="main-nav" aria-label="Primary navigation" data-i18n-aria-label="nav.primary">
+          <a href="#home" data-i18n="nav.home">Home</a>
+          <a href="#dashboard" data-i18n="nav.dashboard">Dashboard</a>
+          <a href="#nature" data-i18n="nav.pause">Pause</a>
+          <a href="#explore" data-i18n="nav.explore">Explore Map</a>
+          <a href="#forecast" data-i18n="nav.forecast">Forecast</a>
+          <a href="#insights" data-i18n="nav.insights">Insights</a>
+          <a href="#compare" data-i18n="nav.compare">Compare</a>
+          <a href="#personal" data-i18n="nav.personal">Personal AirGuard</a>
+          <a href="#exposure" data-i18n="nav.exposure">Exposure</a>
+          <a href="#about" data-i18n="nav.about">About</a>
+        </nav>
+        <div class="utility-tools">
+          <div class="lang-switch" aria-label="Language switcher" data-i18n-aria-label="lang.switcher">
+            <button class="lang-btn is-active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="te">తెలు</button>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" data-i18n-aria-label="theme.toggle">☀️</button>
+        </div>
+      </header>
+      <p class="app-status" id="appStatus" role="status" hidden></p>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="hero-copy">
+            <span class="eyebrow" data-i18n="hero.eyebrow">Hyderabad air intelligence</span>
+            <h1 data-i18n="hero.title">Understand the air around you.</h1>
+            <p data-i18n="hero.subtitle">Explore Hyderabad’s pollution patterns, understand air quality conditions and make informed decisions for a healthier day outdoors.</p>
+            <div class="cta-row">
+              <a class="primary-btn" href="#dashboard" data-i18n="hero.primary">Explore Air Quality</a>
+              <a class="secondary-btn" href="#explore" data-i18n="hero.secondary">Explore Hyderabad Map</a>
+            </div>
+            <div class="hero-metrics">
+              <div class="stat-box">
+                <span class="stat-value" id="stationCount">14</span>
+                <span class="stat-label" data-i18n="hero.stations">Stations monitored</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-value" id="sampleCount">0</span>
+                <span class="stat-label" data-i18n="hero.samples">Source readings</span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-value" id="sourceLabel">OpenCity</span>
+                <span class="stat-label" data-i18n="hero.source">Data source</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="visual-panel">
+              <div class="aqi-card-heading">
+                <span class="aqi-source-label" data-i18n="hero.aqiTitle">Archived official AQI</span>
+                <label class="aqi-station-select">
+                  <span data-i18n="hero.aqiStation">Monitoring station</span>
+                  <select id="aqiStationSelect" aria-label="Select a monitoring station for historical AQI"></select>
+                </label>
+              </div>
+              <div class="ring-card">
+                <div class="ring-center" id="aqiGauge" role="meter" aria-valuemin="0" aria-valuemax="500" aria-label="Historical official AQI">
+                  <div class="ring-label" data-i18n="hero.aqiLabel">CPCB AQI · archive</div>
+                  <div class="ring-score" id="heroAqiValue">—</div>
+                  <div class="ring-category" id="heroAqiCategory" role="status">Loading…</div>
+                </div>
+              </div>
+              <div class="aqi-observation-meta">
+                <strong id="heroAqiStation">—</strong>
+                <span id="heroAqiDate">Loading archived observations…</span>
+                <span id="heroAqiDataSource">OpenCity / CPCB · 2017–2023</span>
+              </div>
+              <p class="aqi-disclaimer" data-i18n="hero.aqiNote">Historical source-reported AQI, not current conditions. The archive has no pollutant breakdown.</p>
+              <p class="hero-image-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Charminar_12032013.jpg" target="_blank" rel="noopener noreferrer">Joydeep / Wikimedia Commons</a> · CC BY-SA 3.0</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="trust-band">
+          <div class="feature-chip" data-i18n="feature.pm25">PM2.5 insights</div>
+          <div class="feature-chip" data-i18n="feature.forecast">AI forecasts</div>
+          <div class="feature-chip" data-i18n="feature.compare">Station comparison</div>
+          <div class="feature-chip" data-i18n="feature.exposure">Exposure guidance</div>
+        </section>
+
+        <section class="section nature-section" id="nature">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="nature.eyebrow">A little space to breathe</span>
+              <h2 data-i18n="nature.title">Take a mindful minute</h2>
+              <p class="section-description" data-i18n="nature.description">Choose a calming nature scene, then follow a gentle one-minute breathing rhythm. This is a relaxation pause, not air-quality guidance.</p>
+            </div>
+          </div>
+          <div class="nature-grid">
+            <article class="card nature-gallery">
+              <div class="nature-photo-wrap">
+                <img id="naturePhoto" src="/static/images/nature-forest.jpg" alt="Sunlight filtering through a green forest path, a nature photograph for a mindful pause" fetchpriority="high" />
+                <div class="nature-photo-shade"></div>
+                <div class="nature-photo-copy">
+                  <span class="nature-photo-kicker" data-i18n="nature.photoKicker">A moment of calm</span>
+                  <h3 id="naturePhotoTitle" data-i18n="nature.forest">Forest path</h3>
+                </div>
+                <button class="photo-arrow photo-prev" id="naturePrev" type="button" aria-label="Previous nature photo" data-i18n-aria-label="nature.previous">‹</button>
+                <button class="photo-arrow photo-next" id="natureNext" type="button" aria-label="Next nature photo" data-i18n-aria-label="nature.next">›</button>
+              </div>
+              <div class="nature-photo-picker" role="group" aria-label="Choose a nature photograph" data-i18n-aria-label="nature.choosePhoto">
+                <button type="button" class="nature-thumb is-active" data-nature-index="0" aria-label="Show forest path photo" aria-pressed="true" data-i18n-aria-label="nature.forest"><img src="/static/images/nature-forest.jpg" alt="" /></button>
+                <button type="button" class="nature-thumb" data-nature-index="1" aria-label="Show mountain lake photo" aria-pressed="false" data-i18n-aria-label="nature.lake"><img src="/static/images/nature-lake.jpg" alt="" /></button>
+                <button type="button" class="nature-thumb" data-nature-index="2" aria-label="Show green canopy photo" aria-pressed="false" data-i18n-aria-label="nature.canopy"><img src="/static/images/nature-canopy.jpg" alt="" /></button>
+              </div>
+              <p class="nature-credit"><span data-i18n="nature.credit">Nature photography for reflection, not local air-quality evidence.</span> <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
+            </article>
+            <article class="card breathing-card">
+              <div>
+                <p class="metric-caption" data-i18n="nature.practice">Guided breathing</p>
+                <h3 data-i18n="nature.practiceTitle">A softer pace, one breath at a time</h3>
+              </div>
+              <div class="breath-orbit" id="breathOrbit">
+                <div class="breath-orb">
+                  <span id="breathPhase" role="status" aria-live="polite" data-i18n="nature.ready">Ready when you are</span>
+                </div>
+              </div>
+              <div class="breath-clock" id="breathClock" aria-label="One minute remaining">01:00</div>
+              <p class="breath-instruction" data-i18n="nature.instruction">Inhale gently for 4 seconds, then exhale for 6. Follow your own comfort.</p>
+              <div class="breath-actions">
+                <button class="primary-btn" id="breathToggle" type="button" data-i18n="nature.start">Start one-minute pause</button>
+                <button class="secondary-btn" id="breathReset" type="button" data-i18n="nature.reset">Reset</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="explore">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="explore.eyebrow">Explore map</span>
+              <h2 data-i18n="explore.title">Hyderabad air quality map</h2>
+              <p class="section-description" data-i18n="explore.description">Explore the city map as geographic context and search the monitoring-station directory. The supplied data does not contain verified monitor coordinates, so no station pins are shown.</p>
+            </div>
+          </div>
+          <article class="card map-card">
+            <div class="map-toolbar">
+              <span id="mapDataStatus" class="loading-skeleton" role="status" data-i18n="explore.loading">Loading Hyderabad station data…</span>
+            </div>
+            <div id="hyderabadAirMap" role="img" aria-label="Hyderabad city map shown for geographic context; monitoring-station coordinates are unavailable" data-i18n-aria-label="explore.mapLabel"></div>
+            <div class="map-legend" aria-label="AirGuard Risk Index map legend" data-i18n-aria-label="explore.legendLabel">
+              <span><i class="legend-swatch good"></i><span data-i18n="explore.legendLow">Lower · under 35</span></span>
+              <span><i class="legend-swatch moderate"></i><span data-i18n="explore.legendModerate">Moderate · 35–74.9</span></span>
+              <span><i class="legend-swatch elevated"></i><span data-i18n="explore.legendElevated">Elevated · 75 or higher</span></span>
+              <span class="map-legend-note" data-i18n="explore.legendNote">Map is for city context only; no monitoring-station pins are provided.</span>
+            </div>
+            <p class="map-attribution"><span data-i18n="explore.locationNote">The supplied station data has no verified monitor coordinates; station locations are not inferred.</span> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a></p>
+          </article>
+          <label class="station-search">
+            <span data-i18n="explore.search">Search monitoring stations</span>
+            <input id="stationSearch" type="search" autocomplete="off" placeholder="Search station name" data-i18n-placeholder="explore.searchPlaceholder" />
+          </label>
+          <div class="explore-grid" id="stationMap"></div>
+        </section>
+
+        <section class="section" id="dashboard">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="dashboard.eyebrow">The main experience</span>
+              <h2 data-i18n="dashboard.title">Hyderabad air quality dashboard</h2>
+            </div>
+            <label class="search-wrap">
+              <span data-i18n="dashboard.stationLabel">Selected station</span>
+              <select id="stationSelect"></select>
+            </label>
+          </div>
+          <p id="dashboardError" class="app-status" role="status"></p>
+
+          <div class="dashboard-grid">
+            <article class="card metric-card emphasis">
+              <div class="metric-head">
+                <div>
+                  <p class="metric-caption" data-i18n="dashboard.currentStatus">Latest recorded reading</p>
+                  <h3 id="stationName">Somajiguda</h3>
+                </div>
+                <span class="status-badge" id="statusBadge">Moderate</span>
+              </div>
+              <div class="score-row">
+                <div class="score-value" id="riskScore">0</div>
+                <div class="score-meta">
+                  <p class="meta-label" data-i18n="dashboard.riskIndex">AirGuard Risk Index</p>
+                  <p id="lastUpdated">—</p>
+                </div>
+              </div>
+              <p class="info-text" id="riskNarrative" data-i18n="dashboard.riskNarrative">Air quality is being interpreted using a station-based exposure index derived from real measurements.</p>
+            </article>
+
+            <article class="card metric-card">
+              <p class="metric-caption" data-i18n="dashboard.dominant">Largest AirGuard index component</p>
+              <h3 id="dominantPollutant">PM2.5</h3>
+              <p id="dominantValue" class="kpi-text">—</p>
+              <p class="kpi-text" data-i18n="dashboard.componentNote">Largest normalized contributor to AirGuard’s custom score; not an AQI pollutant sub-index.</p>
+            </article>
+
+            <article class="card metric-card">
+              <p class="metric-caption" data-i18n="dashboard.pm25">PM2.5</p>
+              <h3 id="pm25Value">—</h3>
+              <p class="kpi-text" data-i18n="dashboard.pm25Note">Fine particles that can travel deep into the respiratory system.</p>
+            </article>
+
+            <article class="card metric-card">
+              <p class="metric-caption" data-i18n="dashboard.no2">NO₂</p>
+              <h3 id="no2Value">—</h3>
+              <p class="kpi-text" data-i18n="dashboard.no2Note">Nitrogen dioxide released from traffic and combustion sources.</p>
+            </article>
+          </div>
+
+          <article class="card pollutant-card">
+            <div class="card-header">
+              <div>
+                <p class="metric-caption" data-i18n="dashboard.pollutantTitle">Available pollutant measurements</p>
+                <h3 data-i18n="dashboard.pollutantCaption">Latest source record · not official AQI</h3>
+              </div>
+              <span id="pollutantObservedAt" class="pollutant-observed-at">—</span>
+            </div>
+            <div id="pollutantReadings" class="pollutant-grid" aria-live="polite"></div>
+            <p class="info-text" data-i18n="dashboard.pollutantNote">Only measurements present in the selected station’s latest source record are shown; unavailable values remain blank.</p>
+          </article>
+
+          <div class="chart-row">
+            <article class="card chart-card wide">
+              <div class="card-header">
+                <div>
+                  <p class="metric-caption" data-i18n="dashboard.trendTitle">Recent concentration trend</p>
+                  <h3 data-i18n="dashboard.trendLabel">PM2.5 over the last 48 readings</h3>
+                </div>
+              </div>
+              <canvas id="trendChart"></canvas>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="insights">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="insights.eyebrow">Insights</span>
+              <h2 data-i18n="insights.title">City-wide air intelligence</h2>
+            </div>
+          </div>
+          <div class="insight-grid">
+            <article class="card insight-card">
+              <p class="metric-caption" data-i18n="insights.best">Best station</p>
+              <h3 id="bestStation">—</h3>
+              <p class="kpi-text" id="bestStationText">—</p>
+            </article>
+            <article class="card insight-card">
+              <p class="metric-caption" data-i18n="insights.worst">Most affected</p>
+              <h3 id="worstStation">—</h3>
+              <p class="kpi-text" id="worstStationText">—</p>
+            </article>
+            <article class="card insight-card">
+              <p class="metric-caption" data-i18n="insights.average">City average</p>
+              <h3 id="averageRisk">—</h3>
+              <p class="kpi-text" data-i18n="insights.averageNote">Average exposure index across active stations</p>
+            </article>
+            <article class="card insight-card">
+              <p class="metric-caption" data-i18n="insights.alerts">High-risk stations</p>
+              <h3 id="alertCount">—</h3>
+              <p class="kpi-text" data-i18n="insights.alertsNote">Stations currently at elevated risk</p>
+            </article>
+          </div>
+          <article class="card summary-card">
+            <p class="metric-caption" data-i18n="insights.summary">City summary</p>
+            <h3 id="insightSummaryTitle" data-i18n="insights.title">Air quality snapshot</h3>
+            <p id="insightSummaryText" class="info-text">Loading air quality insights…</p>
+          </article>
+          <div class="trend-insights-grid">
+            <article class="card chart-card">
+              <p class="metric-caption" data-i18n="insights.monthlyConcentrations">Monthly pollutant concentrations</p>
+              <h3 id="monthlyTrendTitle">PM2.5 and PM10 · selected station</h3>
+              <p id="monthlyTrendStatus" class="chart-status loading-skeleton" role="status">Loading station trends…</p>
+              <canvas id="monthlyTrendChart" aria-label="Monthly PM2.5 and PM10 concentration trends"></canvas>
+              <p class="chart-source-note" data-i18n="insights.concentrationSource">OpenCity / CPCB observations, 2024–2025; monthly means in source timestamps (UTC).</p>
+            </article>
+            <article class="card chart-card">
+              <p class="metric-caption" data-i18n="insights.historicalAqi">Historical official AQI</p>
+              <h3 id="historicalAqiTitle">Hourly AQI archive · selected station</h3>
+              <p id="historicalAqiStatus" class="chart-status loading-skeleton" role="status">Loading archived AQI…</p>
+              <canvas id="historicalAqiChart" aria-label="Monthly mean of archived hourly official AQI"></canvas>
+              <p class="chart-source-note" data-i18n="insights.aqiSource">OpenCity / CPCB hourly AQI archive, 2017–2023. Source-local timezone is unspecified; it is separate from concentration data.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="forecast">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="forecast.eyebrow">Forecasting</span>
+              <h2 data-i18n="forecast.title">AI prediction view</h2>
+            </div>
+          </div>
+          <div class="forecast-grid">
+            <article class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <p class="metric-caption" data-i18n="forecast.history">Historical context and next 24 hours</p>
+                  <h3 id="forecastHeader">PM2.5 forecast</h3>
+                </div>
+              </div>
+              <p class="info-text forecast-freshness loading-skeleton" id="forecastFreshness" role="status">Loading forecast…</p>
+              <canvas id="forecastChart" aria-label="Recent observed PM2.5 and 24-hour forecast"></canvas>
+            </article>
+            <article class="card insights-card">
+              <div class="card-header">
+                <div>
+                  <p class="metric-caption" data-i18n="forecast.model">Model evaluation</p>
+                  <h3 data-i18n="forecast.modelTitle">Prediction quality</h3>
+                </div>
+              </div>
+              <div class="info-list">
+                <div class="info-item"><span>MAE · µg/m³</span><strong id="modelMae">—</strong></div>
+                <div class="info-item"><span>RMSE · µg/m³</span><strong id="modelRmse">—</strong></div>
+                <div class="info-item"><span>R²</span><strong id="modelR2">—</strong></div>
+                <div class="info-item"><span data-i18n="forecast.baseline">Persistence baseline MAE</span><strong id="baselineMae">—</strong></div>
+                <div class="info-item"><span data-i18n="forecast.validatedHorizon">Validated recursive horizon</span><strong id="validatedHorizon">—</strong></div>
+                <div class="info-item"><span data-i18n="forecast.validationOrigins">Complete validation windows</span><strong id="validationOrigins">—</strong></div>
+              </div>
+              <p class="info-text" id="forecastEvaluation"></p>
+              <p class="info-text" id="modelComparison" role="status"></p>
+              <p class="info-text" data-i18n="forecast.note">Forecasts are estimates from historical data. The source feed currently ends in 2025, so this is not live air quality.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="compare">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="compare.eyebrow">Comparison</span>
+              <h2 data-i18n="compare.title">Compare monitoring stations</h2>
+            </div>
+          </div>
+          <div class="compare-controls">
+            <label>
+              <span data-i18n="compare.first">Station 1</span>
+              <select id="compareA"></select>
+            </label>
+            <label>
+              <span data-i18n="compare.second">Station 2</span>
+              <select id="compareB"></select>
+            </label>
+          </div>
+          <article class="card chart-card">
+            <p id="compareStatus" class="chart-status" role="status"></p>
+            <canvas id="compareChart"></canvas>
+          </article>
+        </section>
+
+        <section class="section" id="personal">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="personal.eyebrow">Personal AirGuard</span>
+              <h2 data-i18n="personal.title">Outdoor planning and exposure guidance</h2>
+            </div>
+          </div>
+          <div class="personal-grid">
+            <form id="recommendationForm" class="card form-card">
+              <label>
+                <span data-i18n="personal.station">Location</span>
+                <select id="personalStation"></select>
+              </label>
+              <label>
+                <span data-i18n="personal.activity">Activity</span>
+                <select id="personalActivity">
+                  <option value="walking" data-i18n="activity.walking">Walking</option>
+                  <option value="running" data-i18n="activity.running">Running</option>
+                  <option value="cycling" data-i18n="activity.cycling">Cycling</option>
+                  <option value="sports" data-i18n="activity.sports">Outdoor sports</option>
+                  <option value="travel" data-i18n="activity.travel">Travelling</option>
+                </select>
+              </label>
+              <label>
+                <span data-i18n="personal.duration">Duration</span>
+                <select id="personalDuration">
+                  <option value="15" data-i18n="activity.15minutes">15 minutes</option>
+                  <option value="30" data-i18n="activity.30minutes">30 minutes</option>
+                  <option value="60" data-i18n="activity.1hour">1 hour</option>
+                  <option value="120" data-i18n="activity.2hours">2 hours</option>
+                </select>
+              </label>
+              <label>
+                <span data-i18n="personal.preferredTime">Preferred time (IST)</span>
+                <select id="personalPreferredTime"></select>
+              </label>
+              <button class="primary-btn" type="submit" data-i18n="personal.generate">Generate guidance</button>
+            </form>
+            <article class="card output-card">
+              <p class="metric-caption" data-i18n="personal.result">Recommendation</p>
+              <h3 id="recommendationTitle" data-i18n="personal.resultTitle">A thoughtful plan starts with the latest reading</h3>
+              <p id="recommendationText" data-i18n="personal.resultPrompt">Choose a monitored location, activity and duration to see a data-aware suggestion.</p>
+              <ul class="recommendation-points" id="recommendationPoints"></ul>
+              <div class="disclaimer" data-i18n="personal.disclaimer">This recommendation is informational only and is not medical advice.</div>
+            </article>
+            <article class="card output-card exposure-card" id="exposure">
+              <p class="metric-caption" data-i18n="exposure.eyebrow">Exposure estimator</p>
+              <h3 data-i18n="exposure.title">Concentration × planned duration</h3>
+              <p id="exposureEstimate" class="exposure-value">—</p>
+              <p id="exposureEstimateNote" class="info-text" data-i18n="exposure.prompt">Choose a station and duration to calculate an informational concentration-duration proxy.</p>
+              <div class="disclaimer" data-i18n="exposure.disclaimer">This is not inhaled dose or a forecast. It assumes the selected station’s past concentration stays unchanged for the full duration.</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="section-header">
+            <div>
+              <span class="eyebrow" data-i18n="about.eyebrow">Data transparency</span>
+              <h2 data-i18n="about.title">About AirGuard</h2>
+            </div>
+          </div>
+          <div class="about-grid">
+            <article class="card info-card">
+              <h3 data-i18n="about.project">Project purpose</h3>
+              <p data-i18n="about.projectText">AirGuard is designed to make Hyderabad air quality easier to understand for students, families, professionals and outdoor enthusiasts.</p>
+            </article>
+            <article class="card info-card">
+              <h3 data-i18n="about.sources">Source data</h3>
+              <p data-i18n="about.sourceText">AirGuard uses 14 OpenCity / CPCB station feeds from 2024–2025 and a separate hourly AQI archive from 2017–2023. The AQI archive has no pollutant breakdown or stated timezone; neither source is live.</p>
+            </article>
+            <article class="card info-card">
+              <h3 data-i18n="about.risk">AirGuard Risk Index</h3>
+              <p data-i18n="about.riskText">The Risk Index is a user-facing interpretation derived from measured pollutants. It is not an official AQI issued by a regulatory body.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>AirGuard • Hyderabad air intelligence</div>
+        <div>OpenCity / CPCB source data • modelled exposure interpretation</div>
+      </footer>
+    </div>
+  </body>
+</html>

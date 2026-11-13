@@ -1,0 +1,151 @@
+{
+  "source": "OpenCity / CPCB Hyderabad 15-minute station CSVs",
+  "location_data_note": "The supplied OpenCity / CPCB source records do not include verified monitoring-station coordinates. Map pins use approximate OpenStreetMap locality or named-place references and must not be interpreted as the air monitor's exact position.",
+  "fields": [
+    {
+      "name": "Station ID",
+      "meaning": "Monitoring station identifier",
+      "unit": null
+    },
+    {
+      "name": "State",
+      "meaning": "Source metadata field",
+      "unit": null
+    },
+    {
+      "name": "City",
+      "meaning": "Source metadata field",
+      "unit": null
+    },
+    {
+      "name": "Station Name",
+      "meaning": "Monitoring station name",
+      "unit": null
+    },
+    {
+      "name": "Timestamp",
+      "meaning": "Station observation timestamp (source timezone is normalized to UTC)",
+      "unit": null
+    },
+    {
+      "name": "PM2.5 (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "PM10 (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "NO (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "NO2 (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "NOx (ppb)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "ppb"
+    },
+    {
+      "name": "NH3 (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "SO2 (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "CO (mg/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "mg/m\u00b3"
+    },
+    {
+      "name": "Ozone (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "Benzene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "Toluene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "Xylene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "O Xylene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "Eth-Benzene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "MP-Xylene (\u00b5g/m\u00b3)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b5g/m\u00b3"
+    },
+    {
+      "name": "AT (\u00b0C)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "\u00b0C"
+    },
+    {
+      "name": "RH (%)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "%"
+    },
+    {
+      "name": "WS (m/s)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "m/s"
+    },
+    {
+      "name": "WD (deg)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "deg"
+    },
+    {
+      "name": "RF (mm)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "mm"
+    },
+    {
+      "name": "TOT-RF (mm)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "mm"
+    },
+    {
+      "name": "SR (W/mt2)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "W/mt2"
+    },
+    {
+      "name": "BP (mmHg)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "mmHg"
+    },
+    {
+      "name": "VWS (m/s)",
+      "meaning": "Pollutant or meteorological reading; unit is included in the source column name when supplied",
+      "unit": "m/s"
+    }
+  ]
+}

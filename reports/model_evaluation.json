@@ -1,0 +1,611 @@
+{
+  "generated_at": "2026-11-12T09:58:08.838415+00:00",
+  "source": "OpenCity / CPCB local Hyderabad station CSVs, 2024-2025",
+  "target": "Hourly mean PM2.5 (\u00b5g/m\u00b3)",
+  "evaluation_design": "Chronological 20% holdout; daily rolling origins; recursive 24-hour validation",
+  "forecast_design": "Recursive 24-hour forecast from each station's latest source observation",
+  "stations": [
+    {
+      "station_name": "Bollaram Industrial Area, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-26T20:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 8564,
+        "holdout_samples": 2141,
+        "training_start": "2024-01-06T10:00:00+00:00",
+        "training_end": "2025-08-02T08:00:00+00:00",
+        "holdout_start": "2025-08-02T09:00:00+00:00",
+        "holdout_end": "2025-12-26T19:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 10,
+        "validation_samples": 240,
+        "metrics": {
+          "mae": 7.02,
+          "rmse": 9.13,
+          "r2": 0.469
+        },
+        "persistence_baseline": {
+          "mae": 6.81,
+          "rmse": 8.86,
+          "r2": 0.5
+        },
+        "model_beats_persistence_baseline": false,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 4.29,
+            "rmse": 6.07,
+            "r2": 0.912
+          },
+          "persistence_baseline": {
+            "mae": 4.55,
+            "rmse": 6.61,
+            "r2": 0.896
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Central University, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T21:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 9864,
+        "holdout_samples": 2466,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-07-02T10:00:00+00:00",
+        "holdout_start": "2025-07-02T16:00:00+00:00",
+        "holdout_end": "2025-12-31T21:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 5,
+        "validation_samples": 120,
+        "metrics": {
+          "mae": 3.9,
+          "rmse": 4.78,
+          "r2": 0.211
+        },
+        "persistence_baseline": {
+          "mae": 5.37,
+          "rmse": 6.62,
+          "r2": -0.514
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 3.11,
+            "rmse": 4.69,
+            "r2": 0.955
+          },
+          "persistence_baseline": {
+            "mae": 3.32,
+            "rmse": 5.14,
+            "r2": 0.946
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "ECIL Kapra, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 9371,
+        "holdout_samples": 2343,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-08-21T01:00:00+00:00",
+        "holdout_start": "2025-08-21T02:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 14,
+        "validation_samples": 336,
+        "metrics": {
+          "mae": 2.75,
+          "rmse": 4.98,
+          "r2": -0.499
+        },
+        "persistence_baseline": {
+          "mae": 2.33,
+          "rmse": 4.2,
+          "r2": -0.068
+        },
+        "model_beats_persistence_baseline": false,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 1.71,
+            "rmse": 9.08,
+            "r2": 0.371
+          },
+          "persistence_baseline": {
+            "mae": 1.22,
+            "rmse": 9.04,
+            "r2": 0.377
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "ICRISAT Patancheru, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 11829,
+        "holdout_samples": 2958,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-08-19T02:00:00+00:00",
+        "holdout_start": "2025-08-19T12:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 14,
+        "validation_samples": 336,
+        "metrics": {
+          "mae": 8.71,
+          "rmse": 12.34,
+          "r2": 0.486
+        },
+        "persistence_baseline": {
+          "mae": 10.61,
+          "rmse": 14.33,
+          "r2": 0.307
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 5.05,
+            "rmse": 7.38,
+            "r2": 0.904
+          },
+          "persistence_baseline": {
+            "mae": 5.61,
+            "rmse": 8.32,
+            "r2": 0.878
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "IDA Pashamylaram, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 6812,
+        "holdout_samples": 1704,
+        "training_start": "2024-06-19T11:00:00+00:00",
+        "training_end": "2025-06-29T21:00:00+00:00",
+        "holdout_start": "2025-06-29T22:00:00+00:00",
+        "holdout_end": "2025-12-31T18:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 13,
+        "validation_samples": 312,
+        "metrics": {
+          "mae": 5.98,
+          "rmse": 8.01,
+          "r2": 0.084
+        },
+        "persistence_baseline": {
+          "mae": 8.97,
+          "rmse": 11.67,
+          "r2": -0.944
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 5.2,
+            "rmse": 7.32,
+            "r2": 0.916
+          },
+          "persistence_baseline": {
+            "mae": 4.9,
+            "rmse": 7.4,
+            "r2": 0.915
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "IITH Kandi, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 7049,
+        "holdout_samples": 1763,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-08-14T01:00:00+00:00",
+        "holdout_start": "2025-08-14T02:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 7,
+        "validation_samples": 168,
+        "metrics": {
+          "mae": 2.15,
+          "rmse": 3.34,
+          "r2": 0.367
+        },
+        "persistence_baseline": {
+          "mae": 2.13,
+          "rmse": 3.11,
+          "r2": 0.451
+        },
+        "model_beats_persistence_baseline": false,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 3.78,
+            "rmse": 6.51,
+            "r2": 0.699
+          },
+          "persistence_baseline": {
+            "mae": 3.31,
+            "rmse": 5.8,
+            "r2": 0.761
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Kokapet, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 9785,
+        "holdout_samples": 2447,
+        "training_start": "2024-01-02T15:00:00+00:00",
+        "training_end": "2025-09-11T05:00:00+00:00",
+        "holdout_start": "2025-09-11T06:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 19,
+        "validation_samples": 456,
+        "metrics": {
+          "mae": 1.62,
+          "rmse": 2.04,
+          "r2": 0.056
+        },
+        "persistence_baseline": {
+          "mae": 2.0,
+          "rmse": 2.5,
+          "r2": -0.423
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 1.22,
+            "rmse": 2.38,
+            "r2": 0.832
+          },
+          "persistence_baseline": {
+            "mae": 1.09,
+            "rmse": 2.44,
+            "r2": 0.823
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Kompally Municipal Office, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 8128,
+        "holdout_samples": 2033,
+        "training_start": "2024-01-03T21:00:00+00:00",
+        "training_end": "2025-09-07T02:00:00+00:00",
+        "holdout_start": "2025-09-07T03:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 3,
+        "validation_samples": 72,
+        "metrics": {
+          "mae": 0.86,
+          "rmse": 1.38,
+          "r2": 0.883
+        },
+        "persistence_baseline": {
+          "mae": 3.86,
+          "rmse": 5.56,
+          "r2": -0.883
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 1.02,
+            "rmse": 1.65,
+            "r2": 0.859
+          },
+          "persistence_baseline": {
+            "mae": 0.89,
+            "rmse": 1.58,
+            "r2": 0.87
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Nacharam_TSIIC IALA, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 10690,
+        "holdout_samples": 2673,
+        "training_start": "2024-01-02T04:00:00+00:00",
+        "training_end": "2025-07-31T01:00:00+00:00",
+        "holdout_start": "2025-07-31T02:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 12,
+        "validation_samples": 288,
+        "metrics": {
+          "mae": 2.52,
+          "rmse": 3.31,
+          "r2": -0.035
+        },
+        "persistence_baseline": {
+          "mae": 2.81,
+          "rmse": 4.0,
+          "r2": -0.513
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 1.36,
+            "rmse": 8.27,
+            "r2": 0.321
+          },
+          "persistence_baseline": {
+            "mae": 0.87,
+            "rmse": 1.65,
+            "r2": 0.973
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "New Malakpet, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 10053,
+        "holdout_samples": 2514,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-08-19T01:00:00+00:00",
+        "holdout_start": "2025-08-19T02:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 14,
+        "validation_samples": 336,
+        "metrics": {
+          "mae": 2.26,
+          "rmse": 4.03,
+          "r2": -0.052
+        },
+        "persistence_baseline": {
+          "mae": 2.59,
+          "rmse": 4.22,
+          "r2": -0.155
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 3.66,
+            "rmse": 8.11,
+            "r2": 0.617
+          },
+          "persistence_baseline": {
+            "mae": 3.86,
+            "rmse": 10.07,
+            "r2": 0.41
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Ramachandrapuram, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 7107,
+        "holdout_samples": 1777,
+        "training_start": "2024-01-02T17:00:00+00:00",
+        "training_end": "2025-10-07T21:00:00+00:00",
+        "holdout_start": "2025-10-07T22:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 14,
+        "validation_samples": 336,
+        "metrics": {
+          "mae": 5.74,
+          "rmse": 10.56,
+          "r2": -4.123
+        },
+        "persistence_baseline": {
+          "mae": 26.82,
+          "rmse": 88.43,
+          "r2": -358.021
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 1.13,
+            "rmse": 6.94,
+            "r2": 0.416
+          },
+          "persistence_baseline": {
+            "mae": 1.2,
+            "rmse": 8.37,
+            "r2": 0.15
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Sanathnagar, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 12928,
+        "holdout_samples": 3232,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-07-13T16:00:00+00:00",
+        "holdout_start": "2025-07-13T17:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 14,
+        "validation_samples": 336,
+        "metrics": {
+          "mae": 7.88,
+          "rmse": 10.26,
+          "r2": -0.709
+        },
+        "persistence_baseline": {
+          "mae": 5.7,
+          "rmse": 7.33,
+          "r2": 0.129
+        },
+        "model_beats_persistence_baseline": false,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 5.93,
+            "rmse": 17.25,
+            "r2": 0.655
+          },
+          "persistence_baseline": {
+            "mae": 5.06,
+            "rmse": 15.8,
+            "r2": 0.71
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Somajiguda, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:45:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 7333,
+        "holdout_samples": 1834,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-09-18T01:00:00+00:00",
+        "holdout_start": "2025-09-18T02:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 7,
+        "validation_samples": 168,
+        "metrics": {
+          "mae": 7.85,
+          "rmse": 11.24,
+          "r2": 0.11
+        },
+        "persistence_baseline": {
+          "mae": 11.26,
+          "rmse": 15.01,
+          "r2": -0.587
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 7.09,
+            "rmse": 16.56,
+            "r2": 0.613
+          },
+          "persistence_baseline": {
+            "mae": 6.06,
+            "rmse": 15.54,
+            "r2": 0.66
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    },
+    {
+      "station_name": "Zoo Park, Hyderabad - TSPCB",
+      "status": "evaluated",
+      "last_observation": "2025-12-31T23:30:00+00:00",
+      "model": {
+        "name": "HistGradientBoostingRegressor",
+        "method": "Recursive hourly forecast using recent PM2.5 lags and time-of-week/year features",
+        "training_samples": 11490,
+        "holdout_samples": 2873,
+        "training_start": "2024-01-02T00:00:00+00:00",
+        "training_end": "2025-08-22T09:00:00+00:00",
+        "holdout_start": "2025-08-22T10:00:00+00:00",
+        "holdout_end": "2025-12-31T23:00:00+00:00",
+        "evaluation": "Chronological 20% holdout; daily rolling origins; recursive 24-hour predictions",
+        "validated_horizon_hours": 24,
+        "validation_origins": 16,
+        "validation_samples": 384,
+        "metrics": {
+          "mae": 8.09,
+          "rmse": 11.13,
+          "r2": 0.317
+        },
+        "persistence_baseline": {
+          "mae": 9.43,
+          "rmse": 12.78,
+          "r2": 0.101
+        },
+        "model_beats_persistence_baseline": true,
+        "one_hour_holdout": {
+          "metrics": {
+            "mae": 4.73,
+            "rmse": 6.65,
+            "r2": 0.909
+          },
+          "persistence_baseline": {
+            "mae": 5.2,
+            "rmse": 7.51,
+            "r2": 0.884
+          }
+        }
+      },
+      "forecast_horizon_hours": 24
+    }
+  ]
+}

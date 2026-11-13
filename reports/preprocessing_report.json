@@ -1,0 +1,13 @@
+{
+  "source_resolution": "15-minute observations",
+  "model_resolution": "Hourly mean PM2.5",
+  "steps": [
+    "Load each station CSV without changing the original files.",
+    "Parse Timestamp as UTC; rows without a valid timestamp are excluded from app analytics.",
+    "Convert station readings to numeric values and retain missing measurements as missing.",
+    "Aggregate available 15-minute PM2.5 observations to hourly means for model training.",
+    "Create lag and calendar features; supervised rows with unavailable lag/target values are excluded.",
+    "Keep the hourly 2017-2023 AQI grid separate because it contains AQI, not matching PM2.5 concentration targets."
+  ],
+  "imputation": "No historical targets are filled. Up to three missing hours in the final 24-hour forecast input window are forward-filled and counted in the forecast response."
+}

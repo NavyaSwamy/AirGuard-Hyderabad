@@ -1,0 +1,91 @@
+{
+  "source": "OpenStreetMap place search via Nominatim",
+  "precision": "Approximate locality or named-place reference; these are not verified air-monitor coordinates.",
+  "attribution": "Map data © OpenStreetMap contributors",
+  "locations": {
+    "Bollaram Industrial Area, Hyderabad": {
+      "latitude": 17.5542504,
+      "longitude": 78.3530366,
+      "reference": "Bollaram locality",
+      "lookup_query": "Bollaram, Telangana, India"
+    },
+    "Central University, Hyderabad": {
+      "latitude": 17.4530357,
+      "longitude": 78.3270312,
+      "reference": "University of Hyderabad campus",
+      "lookup_query": "University of Hyderabad, Telangana, India"
+    },
+    "ECIL Kapra, Hyderabad": {
+      "latitude": 17.4734553,
+      "longitude": 78.5708992,
+      "reference": "ECIL Junction, Kapra",
+      "lookup_query": "ECIL, Hyderabad, Telangana, India"
+    },
+    "ICRISAT Patancheru, Hyderabad": {
+      "latitude": 17.496315,
+      "longitude": 78.2677697,
+      "reference": "ICRISAT campus",
+      "lookup_query": "ICRISAT Patancheru, Telangana, India"
+    },
+    "IDA Pashamylaram, Hyderabad": {
+      "latitude": 17.5279026,
+      "longitude": 78.1900123,
+      "reference": "Pashamylaram locality",
+      "lookup_query": "Pashamylaram, Telangana, India"
+    },
+    "IITH Kandi, Hyderabad": {
+      "latitude": 17.5922751,
+      "longitude": 78.1221891,
+      "reference": "IIT Hyderabad campus",
+      "lookup_query": "Indian Institute of Technology Hyderabad, Telangana, India"
+    },
+    "Kokapet, Hyderabad": {
+      "latitude": 17.3948624,
+      "longitude": 78.3365214,
+      "reference": "Kokapet locality",
+      "lookup_query": "Kokapet, Telangana, India"
+    },
+    "Kompally Municipal Office, Hyderabad": {
+      "latitude": 17.5401462,
+      "longitude": 78.4909369,
+      "reference": "Kompally locality, near Nizamabad Road",
+      "lookup_query": "Kompally, Telangana, India"
+    },
+    "Nacharam_TSIIC IALA, Hyderabad": {
+      "latitude": 17.4284936,
+      "longitude": 78.5528098,
+      "reference": "Nacharam locality",
+      "lookup_query": "Nacharam, Hyderabad, Telangana, India"
+    },
+    "New Malakpet, Hyderabad": {
+      "latitude": 17.3689384,
+      "longitude": 78.5159378,
+      "reference": "New Malakpet locality",
+      "lookup_query": "New Malakpet, Hyderabad, Telangana, India"
+    },
+    "Ramachandrapuram, Hyderabad": {
+      "latitude": 17.5086345,
+      "longitude": 78.3018685,
+      "reference": "Ramachandrapuram ward",
+      "lookup_query": "Ramachandrapuram, Hyderabad, Telangana, India"
+    },
+    "Sanathnagar, Hyderabad": {
+      "latitude": 17.4522594,
+      "longitude": 78.4446705,
+      "reference": "Sanathnagar locality",
+      "lookup_query": "Sanath Nagar, Hyderabad, Telangana, India"
+    },
+    "Somajiguda, Hyderabad": {
+      "latitude": 17.4255053,
+      "longitude": 78.4585197,
+      "reference": "Somajiguda locality",
+      "lookup_query": "Somajiguda, Hyderabad, Telangana, India"
+    },
+    "Zoo Park, Hyderabad": {
+      "latitude": 17.3514419,
+      "longitude": 78.4455598,
+      "reference": "Nehru Zoological Park",
+      "lookup_query": "Nehru Zoological Park, Hyderabad, Telangana, India"
+    }
+  }
+}
