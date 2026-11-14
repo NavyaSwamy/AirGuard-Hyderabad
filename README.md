@@ -38,6 +38,7 @@
 - [Setup on macOS](#setup-on-macos)
 - [Data, database, and model workflow](#data-database-and-model-workflow)
 - [Run the application](#run-the-application)
+- [Deploy online](#deploy-online)
 - [HTTP API](#http-api)
 - [Dashboard and visualisations](#dashboard-and-visualisations)
 - [Progressive Web App](#progressive-web-app)
@@ -86,7 +87,7 @@ Air-quality information can be difficult to interpret when measurements, AQI val
 | ⚠️ Limited | Offline support | Service worker caches a static app shell; it does not make the API, forecast, external map tiles, or CDN libraries available offline. |
 | ❌ Not implemented | Live air-quality feed | The checked-in data is historical; the application does not connect to a live sensor service. |
 | ❌ Not implemented | Verified monitor coordinates | Source data has no confirmed sensor coordinates; map points are contextual locality references. |
-| ❌ Not implemented | Production hosting | No production server, deployment target, or production configuration is included. |
+| ⚙️ Configured | Render deployment | A Render Blueprint provisions the Flask app with Gunicorn. The live service still needs to be created from the deploy link below. |
 | ❌ Not implemented | Medical or route-specific advice | No medical validation, personal sensor input, route-level exposure model, or clinical recommendation is provided. |
 
 The current interface is a single page with hash-based sections, not a set of independently routed pages.
@@ -254,9 +255,9 @@ The diagram describes the checked-in application. The map's place references are
 | Charts | Chart.js, loaded from jsDelivr without a pinned version |
 | Maps | Leaflet 1.9.4 and OpenStreetMap |
 | Browser application support | Web App Manifest and service worker |
-| Deployment configuration | Flask built-in development server only |
+| Deployment | Flask development server locally; Gunicorn and Render Blueprint for hosted deployment |
 
-Python dependency pins are listed in [`requirements.txt`](requirements.txt). The project does not declare a Python runtime version. No Node.js build pipeline, Docker setup, production WSGI server, CI workflow, or hosting-provider configuration was found.
+Python dependency pins are listed in [`requirements.txt`](requirements.txt). The Render deployment uses Python 3.13.3. No Node.js build pipeline, Docker setup, or CI workflow is configured.
 
 ## Project structure
 
@@ -266,6 +267,7 @@ Python dependency pins are listed in [`requirements.txt`](requirements.txt). The
 ├── airguard_forecasting.py        # PM2.5 features, model training and validation
 ├── PROJECT_REPORT.md              # Existing project report
 ├── requirements.txt               # Pinned Python dependencies
+├── render.yaml                    # Render web service and deployment configuration
 ├── data/
 │   ├── raw/
 │   │   ├── fifteen_min_2024_25/   # 14 pollutant concentration CSVs
@@ -357,7 +359,22 @@ To select another port:
 PORT=5002 python app.py
 ```
 
-The checked-in entry point runs with `debug=True`; this is a development configuration and must not be exposed as a production service.
+The checked-in entry point runs with `debug=True`; this is only used by the local development server. The Render configuration starts the app with Gunicorn instead.
+
+## Deploy online
+
+Use the button to connect this GitHub repository to Render and create the configured web service:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/NavyaSwamy/AirGuard-Hyderabad)
+
+1. Sign in to Render and authorize access to `NavyaSwamy/AirGuard-Hyderabad`.
+2. Review the Blueprint settings and confirm creation of the `airguard-hyderabad` web service.
+3. Render installs `requirements.txt`, loads the checked-in historical datasets, and starts the app using Gunicorn.
+4. When the first deploy succeeds, Render shows the public `onrender.com` execution URL in the service dashboard. Open that URL to use AirGuard.
+
+**This is a paid 2 GB compute configuration.** The app's CSV-loading path was measured locally at approximately 1 GiB peak process memory, so the 512 MB free plan is not a suitable target. Render displays applicable pricing and asks for confirmation during service creation; review it before proceeding. A paid instance avoids the free-plan idle spin-down, but availability is still subject to Render's platform and service operation.
+
+The button is a one-click **deployment setup** link, not an already-created live site. A public execution URL cannot exist until you authorize Render and complete the initial deployment in your account. GitHub Pages cannot host this Flask backend or its on-request forecasts.
 
 ## HTTP API
 
@@ -442,7 +459,8 @@ Offline behavior is limited:
 - **No medical validation:** the guidance is informational and is not health or medical advice.
 - **Exposure estimator:** concentration multiplied by planned duration is not inhaled dose, personal exposure, or a future concentration estimate.
 - **Missing observations:** pollutant availability differs by station and time. A blank value means unavailable, not zero.
-- **Development server:** `debug=True` and Flask's built-in server are unsuitable for production deployment.
+- **Local development server:** `debug=True` is enabled only when running `python app.py`; the Render Blueprint uses Gunicorn.
+- **Hosted persistence:** Render's service filesystem is not a permanent database. The application rebuilds its SQLite snapshot database from checked-in CSVs at startup; runtime changes are not durable.
 
 ## Planned enhancements
 
@@ -452,7 +470,7 @@ These are potential future directions, not features currently claimed as impleme
 - Obtain authoritative monitor coordinates and validate station metadata before replacing approximate map references.
 - Improve forecasting with stronger baselines, time-based backtesting, uncertainty intervals, and station-specific error analysis.
 - Add explicit data-versioning and model-artifact management if reproducible offline inference becomes a requirement.
-- Add a production deployment configuration, monitoring, and automated CI checks.
+- Add automated CI checks, monitoring, and a durable database if persistent user-generated data is introduced.
 - Capture and maintain real desktop and mobile product screenshots.
 
 ## Research and potential impact
