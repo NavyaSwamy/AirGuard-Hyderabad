@@ -23,7 +23,7 @@
 
 > **At a glance:** AirGuard is a Flask web app for exploring historical OpenCity/CPCB measurements from 14 Hyderabad monitoring stations. It combines station-level pollutant views, an explicitly custom risk indicator, approximate locality map references, a separately sourced historical AQI archive, station comparisons, and a recursively evaluated 24-hour PM2.5 forecast. It is not a live monitoring service or a medical product.
 
-> **Open the project:** [AirGuard on GitHub Pages](https://navyaswamy.github.io/AirGuard-Hyderabad/) (available after the first Pages deployment succeeds)
+> **Live app:** [https://navyaswamy.github.io/AirGuard-Hyderabad/](https://navyaswamy.github.io/AirGuard-Hyderabad/)
 
 ## Contents
 
@@ -374,9 +374,9 @@ The checked-in entry point runs with `debug=True`; this is only used by the loca
 
 **[Open AirGuard on GitHub Pages](https://navyaswamy.github.io/AirGuard-Hyderabad/)**
 
-The public link becomes active after the first Pages workflow deployment succeeds.
+The first Pages deployment is complete. Subsequent pushes to `main` trigger a fresh static snapshot deployment.
 
-The GitHub Actions workflow builds and publishes the site on every push to `main`. If the first deployment does not start automatically, open the repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source, and rerun the `Deploy AirGuard to GitHub Pages` workflow.
+The GitHub Actions workflow rebuilds and publishes the site on every push to `main`. Follow the `Deploy AirGuard to GitHub Pages` workflow in the repository's **Actions** tab to monitor deployments.
 
 The workflow uses the repository's checked-in datasets to precompute the station API responses and validated 24-hour forecasts. The published page loads this generated snapshot in the browser; it does not start a Flask server.
 
