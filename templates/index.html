@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#071d18" />
     <title>AirGuard | Breathe Smarter. Live Healthier.</title>
     <meta name="description" content="Explore Hyderabad air monitoring data, station maps, PM2.5 forecasts, and thoughtful outdoor planning with AirGuard." />
-    <link rel="icon" type="image/svg+xml" href="/static/icons/icon-192.svg" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="icon" type="image/svg+xml" href="static/icons/icon-192.svg" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="static/styles.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script defer src="/static/app.js"></script>
+    <script defer src="static/app.js"></script>
   </head>
   <body>
     <div class="page-shell">
@@ -116,7 +116,7 @@
           <div class="nature-grid">
             <article class="card nature-gallery">
               <div class="nature-photo-wrap">
-                <img id="naturePhoto" src="/static/images/nature-forest.jpg" alt="Sunlight filtering through a green forest path, a nature photograph for a mindful pause" fetchpriority="high" />
+                <img id="naturePhoto" src="static/images/nature-forest.jpg" alt="Sunlight filtering through a green forest path, a nature photograph for a mindful pause" fetchpriority="high" />
                 <div class="nature-photo-shade"></div>
                 <div class="nature-photo-copy">
                   <span class="nature-photo-kicker" data-i18n="nature.photoKicker">A moment of calm</span>
@@ -126,9 +126,9 @@
                 <button class="photo-arrow photo-next" id="natureNext" type="button" aria-label="Next nature photo" data-i18n-aria-label="nature.next">›</button>
               </div>
               <div class="nature-photo-picker" role="group" aria-label="Choose a nature photograph" data-i18n-aria-label="nature.choosePhoto">
-                <button type="button" class="nature-thumb is-active" data-nature-index="0" aria-label="Show forest path photo" aria-pressed="true" data-i18n-aria-label="nature.forest"><img src="/static/images/nature-forest.jpg" alt="" /></button>
-                <button type="button" class="nature-thumb" data-nature-index="1" aria-label="Show mountain lake photo" aria-pressed="false" data-i18n-aria-label="nature.lake"><img src="/static/images/nature-lake.jpg" alt="" /></button>
-                <button type="button" class="nature-thumb" data-nature-index="2" aria-label="Show green canopy photo" aria-pressed="false" data-i18n-aria-label="nature.canopy"><img src="/static/images/nature-canopy.jpg" alt="" /></button>
+                <button type="button" class="nature-thumb is-active" data-nature-index="0" aria-label="Show forest path photo" aria-pressed="true" data-i18n-aria-label="nature.forest"><img src="static/images/nature-forest.jpg" alt="" /></button>
+                <button type="button" class="nature-thumb" data-nature-index="1" aria-label="Show mountain lake photo" aria-pressed="false" data-i18n-aria-label="nature.lake"><img src="static/images/nature-lake.jpg" alt="" /></button>
+                <button type="button" class="nature-thumb" data-nature-index="2" aria-label="Show green canopy photo" aria-pressed="false" data-i18n-aria-label="nature.canopy"><img src="static/images/nature-canopy.jpg" alt="" /></button>
               </div>
               <p class="nature-credit"><span data-i18n="nature.credit">Nature photography for reflection, not local air-quality evidence.</span> <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
             </article>
@@ -454,6 +454,7 @@
       <footer class="footer">
         <div>AirGuard • Hyderabad air intelligence</div>
         <div>OpenCity / CPCB source data • modelled exposure interpretation</div>
+        <div id="snapshotStatus" role="status" aria-live="polite"></div>
       </footer>
     </div>
   </body>

@@ -100,7 +100,7 @@ h1 { font-size: clamp(2.8rem, 5vw, 4.6rem); line-height: 1.05; margin: 18px 0 14
 .hero-visual { justify-content: stretch; }
 .visual-panel {
   position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; width: 100%; min-height: 520px; padding: 24px; border-radius: 32px; border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(4, 20, 17, .52), rgba(4, 20, 17, .88)), url("/static/images/hyderabad-charminar-web.jpg") center 44% / cover, var(--bg-soft);
+  background: linear-gradient(180deg, rgba(4, 20, 17, .52), rgba(4, 20, 17, .88)), url("images/hyderabad-charminar-web.jpg") center 44% / cover, var(--bg-soft);
   box-shadow: var(--shadow);
 }
 .aqi-card-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }

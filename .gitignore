@@ -10,3 +10,5 @@ __pycache__/
 .env.*
 *.log
 .ipynb_checkpoints/
+_site/
+_pages-preview/

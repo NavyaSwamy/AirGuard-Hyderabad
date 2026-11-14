@@ -150,6 +150,7 @@ const translations = {
     'forecast.error': 'Forecast unavailable: {message}',
     'dashboard.error': 'Station data could not be loaded: {message}',
     'app.error': 'AirGuard data could not be loaded: {message}',
+    'app.snapshot': 'Static data snapshot generated {date} UTC. Measurements are historical, not live.',
     'compare.eyebrow': 'Comparison',
     'compare.title': 'Compare monitoring stations',
     'compare.first': 'Station 1',
@@ -360,6 +361,7 @@ const translations = {
     'forecast.error': 'అంచనా అందుబాటులో లేదు: {message}',
     'dashboard.error': 'స్టేషన్ డేటా లోడ్ కాలేదు: {message}',
     'app.error': 'ఎయిర్‌గార్డ్ డేటా లోడ్ కాలేదు: {message}',
+    'app.snapshot': 'స్టాటిక్ డేటా స్నాప్‌షాట్ {date} UTCన రూపొందించబడింది. కొలతలు గత డేటా మాత్రమే, ప్రత్యక్షం కాదు.',
     'compare.eyebrow': 'పోలిక',
     'compare.title': 'స్టేషన్‌లను పోలిక చేయండి',
     'compare.first': 'స్టేషన్ 1',
@@ -424,6 +426,7 @@ const translations = {
 const state = {
   lang: 'en',
   theme: 'dark',
+  summaryMeta: null,
   stations: [],
   insights: null,
   currentStationSummary: null,
@@ -452,21 +455,99 @@ const state = {
 
 const naturePhotos = [
   {
-    src: '/static/images/nature-forest.jpg',
+    src: 'static/images/nature-forest.jpg',
     alt: { en: 'Sunlight filtering through a green forest path, a nature photograph for a mindful pause', te: 'ప్రశాంత విరామం కోసం పచ్చని అడవి దారిపై పడుతున్న సూర్యకాంతి చిత్రం' },
     title: 'nature.forest'
   },
   {
-    src: '/static/images/nature-lake.jpg',
+    src: 'static/images/nature-lake.jpg',
     alt: { en: 'A quiet mountain lake surrounded by green hills', te: 'పచ్చని కొండల మధ్య నిశ్శబ్దమైన పర్వత సరస్సు' },
     title: 'nature.lake'
   },
   {
-    src: '/static/images/nature-canopy.jpg',
+    src: 'static/images/nature-canopy.jpg',
     alt: { en: 'Looking up through a canopy of green trees', te: 'పచ్చని చెట్ల కొమ్మల మధ్య నుంచి కనిపించే ఆకాశం' },
     title: 'nature.canopy'
   }
 ];
+
+let staticApiData;
+
+async function fetchApi(endpoint) {
+  if (!window.AIRGUARD_STATIC) return fetch(endpoint);
+
+  if (!staticApiData) {
+    staticApiData = fetch('airguard-api.json').then(response => {
+      if (!response.ok) throw new Error('The published AirGuard data snapshot is unavailable.');
+      return response.json();
+    });
+  }
+
+  const url = new URL(endpoint, window.location.href);
+  const apiPath = url.pathname.slice(url.pathname.indexOf('/api/') + 5).split('/');
+  const route = apiPath.shift();
+  const stationName = decodeURIComponent(apiPath.join('/'));
+  const data = await staticApiData;
+  let status = 200;
+  let body;
+
+  switch (route) {
+    case 'summary':
+      body = {
+        ...data.summary,
+        meta: {
+          ...data.summary.meta,
+          snapshot_generated_at: data.generated_at
+        }
+      };
+      break;
+    case 'insights':
+      body = data.insights;
+      break;
+    case 'station':
+      body = data.stations[stationName];
+      break;
+    case 'historical-aqi':
+      body = data.historical_aqi[stationName];
+      break;
+    case 'monthly-trends':
+      body = data.monthly_trends[stationName];
+      break;
+    case 'forecast': {
+      const forecast = data.forecasts[stationName];
+      status = forecast?.status || 404;
+      body = forecast?.body || { error: 'Forecast data is unavailable for this station.' };
+      break;
+    }
+    case 'time-profile':
+      body = data.time_profiles[stationName];
+      break;
+    case 'compare': {
+      const selected = url.searchParams.getAll('stations');
+      const names = selected.length ? selected : [data.summary.stations[0]?.station_name].filter(Boolean);
+      body = { stations: data.comparison.stations.filter(station => names.includes(station.station_name)) };
+      break;
+    }
+    case 'model-metrics':
+      status = data.model_metrics.status;
+      body = data.model_metrics.body;
+      break;
+    default:
+      status = 404;
+      body = { error: 'Static API endpoint not found.' };
+  }
+
+  if (!body && status === 200) {
+    status = 404;
+    body = { error: 'Station data is unavailable in this published snapshot.' };
+  }
+
+  return {
+    ok: status >= 200 && status < 300,
+    status,
+    json: async () => body
+  };
+}
 
 function applyTranslations(lang) {
   document.documentElement.lang = lang;
@@ -582,9 +663,22 @@ function stationRiskColor(station) {
 }
 
 function renderSummary(meta) {
+  state.summaryMeta = meta;
   document.getElementById('stationCount').textContent = meta.station_count || 0;
   document.getElementById('sampleCount').textContent = new Intl.NumberFormat().format(meta.sample_count || 0);
   document.getElementById('sourceLabel').textContent = 'OpenCity / CPCB';
+  const snapshotStatus = document.getElementById('snapshotStatus');
+  if (snapshotStatus) {
+    snapshotStatus.textContent = meta.snapshot_generated_at
+      ? translations[state.lang]['app.snapshot'].replace(
+        '{date}',
+        new Date(meta.snapshot_generated_at).toLocaleString(
+          state.lang === 'te' ? 'te-IN' : 'en-GB',
+          { timeZone: 'UTC' }
+        )
+      )
+      : '';
+  }
 }
 
 function localizedAqiCategory(category) {
@@ -882,7 +976,7 @@ function renderInsights(insights) {
 }
 
 async function loadInsights() {
-  const response = await fetch('/api/insights');
+  const response = await fetchApi('/api/insights');
   const data = await response.json();
   if (!response.ok) throw new Error(data.error || 'City insights are unavailable.');
   renderInsights(data.insights || {});
@@ -938,7 +1032,7 @@ function renderDashboard(station) {
 }
 
 async function fetchStation(stationName) {
-  const response = await fetch(`/api/station/${encodeURIComponent(stationName)}`);
+  const response = await fetchApi(`/api/station/${encodeURIComponent(stationName)}`);
   const data = await response.json();
   return data;
 }
@@ -1069,8 +1163,8 @@ async function loadStationInsights(stationName) {
   document.getElementById('monthlyTrendStatus').classList.add('loading-skeleton');
   document.getElementById('historicalAqiStatus').classList.add('loading-skeleton');
   const [trendResponse, aqiResponse] = await Promise.all([
-    fetch(`/api/monthly-trends/${encodeURIComponent(stationName)}`),
-    fetch(`/api/historical-aqi/${encodeURIComponent(stationName)}`)
+    fetchApi(`/api/monthly-trends/${encodeURIComponent(stationName)}`),
+    fetchApi(`/api/historical-aqi/${encodeURIComponent(stationName)}`)
   ]);
   const [trendData, aqiData] = await Promise.all([trendResponse.json(), aqiResponse.json()]);
   if (!trendResponse.ok) throw new Error(trendData.error || 'Monthly concentration data is unavailable.');
@@ -1084,7 +1178,7 @@ async function renderForecast(stationName) {
   const freshness = document.getElementById('forecastFreshness');
   freshness.classList.add('loading-skeleton');
   try {
-    const response = await fetch(`/api/forecast/${encodeURIComponent(stationName)}`);
+    const response = await fetchApi(`/api/forecast/${encodeURIComponent(stationName)}`);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'The forecast service returned an error.');
 
@@ -1182,7 +1276,7 @@ async function renderComparison() {
   query.append('stations', document.getElementById('compareA').value);
   query.append('stations', document.getElementById('compareB').value);
   try {
-    const response = await fetch(`/api/compare?${query}`);
+    const response = await fetchApi(`/api/compare?${query}`);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Station comparison is unavailable.');
     document.getElementById('compareStatus').textContent = '';
@@ -1369,7 +1463,7 @@ async function updateDashboard() {
 async function populateData() {
   setPreferredTimeOptions();
   try {
-    const summaryResponse = await fetch('/api/summary');
+    const summaryResponse = await fetchApi('/api/summary');
     const summary = await summaryResponse.json();
     if (!summaryResponse.ok) throw new Error(summary.error || 'Station summary is unavailable.');
     state.stations = summary.stations || [];
@@ -1408,6 +1502,7 @@ document.getElementById('themeToggle').addEventListener('click', () => setTheme(
 document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
   state.lang = btn.dataset.lang;
   applyTranslations(state.lang);
+  if (state.summaryMeta) renderSummary(state.summaryMeta);
 }));
 document.querySelectorAll('.nature-thumb').forEach(button => button.addEventListener('click', () => {
   renderNaturePhoto(Number(button.dataset.natureIndex));
@@ -1434,7 +1529,7 @@ document.getElementById('recommendationForm').addEventListener('submit', async e
   state.timeProfileError = null;
   try {
     const stationName = encodeURIComponent(state.recommendationSelection.stationName);
-    const response = await fetch(`/api/time-profile/${stationName}`);
+    const response = await fetchApi(`/api/time-profile/${stationName}`);
     const profile = await response.json();
     if (!response.ok) throw new Error(profile.error || 'Historical time-of-day data is unavailable.');
     state.timeProfile = profile;
@@ -1444,7 +1539,7 @@ document.getElementById('recommendationForm').addEventListener('submit', async e
   renderPersonalRecommendation();
 });
 
-if ('serviceWorker' in navigator) {
+if (!window.AIRGUARD_STATIC && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/static/sw.js').catch(() => {});
   });

@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://github.com/NavyaSwamy/AirGuard-Hyderabad"><img alt="Project repository" src="https://img.shields.io/badge/GitHub-AirGuard--Hyderabad-181717?logo=github"></a>
+  <a href="https://navyaswamy.github.io/AirGuard-Hyderabad/"><img alt="Open AirGuard on GitHub Pages" src="https://img.shields.io/badge/Live%20demo-GitHub%20Pages-222222?logo=github"></a>
   <img alt="Python" src="https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white">
   <img alt="Flask" src="https://img.shields.io/badge/Flask-3.1.3-000000?logo=flask">
   <img alt="pandas" src="https://img.shields.io/badge/pandas-3.1.1-150458?logo=pandas">
@@ -21,6 +22,8 @@
 </p>
 
 > **At a glance:** AirGuard is a Flask web app for exploring historical OpenCity/CPCB measurements from 14 Hyderabad monitoring stations. It combines station-level pollutant views, an explicitly custom risk indicator, approximate locality map references, a separately sourced historical AQI archive, station comparisons, and a recursively evaluated 24-hour PM2.5 forecast. It is not a live monitoring service or a medical product.
+
+> **Open the project:** [AirGuard on GitHub Pages](https://navyaswamy.github.io/AirGuard-Hyderabad/) (available after the first Pages deployment succeeds)
 
 ## Contents
 
@@ -39,6 +42,7 @@
 - [Data, database, and model workflow](#data-database-and-model-workflow)
 - [Run the application](#run-the-application)
 - [Deploy online](#deploy-online)
+- [GitHub Pages limitations](#github-pages-limitations)
 - [HTTP API](#http-api)
 - [Dashboard and visualisations](#dashboard-and-visualisations)
 - [Progressive Web App](#progressive-web-app)
@@ -87,7 +91,7 @@ Air-quality information can be difficult to interpret when measurements, AQI val
 | ⚠️ Limited | Offline support | Service worker caches a static app shell; it does not make the API, forecast, external map tiles, or CDN libraries available offline. |
 | ❌ Not implemented | Live air-quality feed | The checked-in data is historical; the application does not connect to a live sensor service. |
 | ❌ Not implemented | Verified monitor coordinates | Source data has no confirmed sensor coordinates; map points are contextual locality references. |
-| ⚙️ Configured | Render deployment | A Render Blueprint provisions the Flask app with Gunicorn. The live service still needs to be created from the deploy link below. |
+| ⚙️ Configured | GitHub Pages | GitHub Actions publishes the interactive frontend and a pre-generated data/forecast snapshot at the project link above. |
 | ❌ Not implemented | Medical or route-specific advice | No medical validation, personal sensor input, route-level exposure model, or clinical recommendation is provided. |
 
 The current interface is a single page with hash-based sections, not a set of independently routed pages.
@@ -255,9 +259,9 @@ The diagram describes the checked-in application. The map's place references are
 | Charts | Chart.js, loaded from jsDelivr without a pinned version |
 | Maps | Leaflet 1.9.4 and OpenStreetMap |
 | Browser application support | Web App Manifest and service worker |
-| Deployment | Flask development server locally; Gunicorn and Render Blueprint for hosted deployment |
+| Deployment | Flask development server locally; GitHub Actions and GitHub Pages for the static hosted version |
 
-Python dependency pins are listed in [`requirements.txt`](requirements.txt). The Render deployment uses Python 3.13.3. No Node.js build pipeline, Docker setup, or CI workflow is configured.
+Python dependency pins are listed in [`requirements.txt`](requirements.txt). The GitHub Pages workflow uses Python 3.13. No Node.js build pipeline, Docker setup, or external hosting provider is required.
 
 ## Project structure
 
@@ -267,7 +271,9 @@ Python dependency pins are listed in [`requirements.txt`](requirements.txt). The
 ├── airguard_forecasting.py        # PM2.5 features, model training and validation
 ├── PROJECT_REPORT.md              # Existing project report
 ├── requirements.txt               # Pinned Python dependencies
-├── render.yaml                    # Render web service and deployment configuration
+├── .github/
+│   └── workflows/
+│       └── github-pages.yml       # Builds and deploys the GitHub Pages site
 ├── data/
 │   ├── raw/
 │   │   ├── fifteen_min_2024_25/   # 14 pollutant concentration CSVs
@@ -279,6 +285,7 @@ Python dependency pins are listed in [`requirements.txt`](requirements.txt). The
 │       └── station_locations.json # Approximate OSM place references
 ├── reports/                       # Data quality, inventory and model reports
 ├── scripts/
+│   ├── build_github_pages.py      # Exports static API and forecast snapshots for Pages
 │   └── train_forecasts.py         # Batch station evaluation report generator
 ├── static/
 │   ├── app.js
@@ -359,22 +366,31 @@ To select another port:
 PORT=5002 python app.py
 ```
 
-The checked-in entry point runs with `debug=True`; this is only used by the local development server. The Render configuration starts the app with Gunicorn instead.
+The checked-in entry point runs with `debug=True`; this is only used by the local development server.
 
 ## Deploy online
 
-Use the button to connect this GitHub repository to Render and create the configured web service:
+### Open the published app
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/NavyaSwamy/AirGuard-Hyderabad)
+**[Open AirGuard on GitHub Pages](https://navyaswamy.github.io/AirGuard-Hyderabad/)**
 
-1. Sign in to Render and authorize access to `NavyaSwamy/AirGuard-Hyderabad`.
-2. Review the Blueprint settings and confirm creation of the `airguard-hyderabad` web service.
-3. Render installs `requirements.txt`, loads the checked-in historical datasets, and starts the app using Gunicorn.
-4. When the first deploy succeeds, Render shows the public `onrender.com` execution URL in the service dashboard. Open that URL to use AirGuard.
+The public link becomes active after the first Pages workflow deployment succeeds.
 
-**This is a paid 2 GB compute configuration.** The app's CSV-loading path was measured locally at approximately 1 GiB peak process memory, so the 512 MB free plan is not a suitable target. Render displays applicable pricing and asks for confirmation during service creation; review it before proceeding. A paid instance avoids the free-plan idle spin-down, but availability is still subject to Render's platform and service operation.
+The GitHub Actions workflow builds and publishes the site on every push to `main`. If the first deployment does not start automatically, open the repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source, and rerun the `Deploy AirGuard to GitHub Pages` workflow.
 
-The button is a one-click **deployment setup** link, not an already-created live site. A public execution URL cannot exist until you authorize Render and complete the initial deployment in your account. GitHub Pages cannot host this Flask backend or its on-request forecasts.
+The workflow uses the repository's checked-in datasets to precompute the station API responses and validated 24-hour forecasts. The published page loads this generated snapshot in the browser; it does not start a Flask server.
+
+### Rebuild the static site locally
+
+```bash
+python scripts/build_github_pages.py --output _pages-preview
+```
+
+Open `_pages-preview/index.html` through a local static HTTP server to preview the export. The `_pages-preview/` directory is ignored by Git.
+
+## GitHub Pages limitations
+
+GitHub Pages serves static files only. It cannot run Flask, SQLite, or on-request model training. AirGuard therefore publishes a pre-generated snapshot of station data and forecasts when the workflow runs. The dashboard is interactive, but its readings and predictions remain fixed until another successful deployment. This is historical data—not a live feed—and link availability depends on GitHub Pages.
 
 ## HTTP API
 
@@ -441,7 +457,7 @@ Charts are rendered in the browser with Chart.js. The map uses Leaflet and OpenS
 
 ## Progressive Web App
 
-The repository includes a web app manifest, SVG icons, and a service worker. The service worker pre-caches the main page and selected local static assets and can return a cached shell while offline.
+The repository includes a web app manifest, SVG icons, and a service worker. The Flask-served version registers the service worker, which pre-caches the main page and selected local static assets. The GitHub Pages build intentionally does not register that worker because the project site is hosted below a repository subpath.
 
 Offline behavior is limited:
 
@@ -459,8 +475,8 @@ Offline behavior is limited:
 - **No medical validation:** the guidance is informational and is not health or medical advice.
 - **Exposure estimator:** concentration multiplied by planned duration is not inhaled dose, personal exposure, or a future concentration estimate.
 - **Missing observations:** pollutant availability differs by station and time. A blank value means unavailable, not zero.
-- **Local development server:** `debug=True` is enabled only when running `python app.py`; the Render Blueprint uses Gunicorn.
-- **Hosted persistence:** Render's service filesystem is not a permanent database. The application rebuilds its SQLite snapshot database from checked-in CSVs at startup; runtime changes are not durable.
+- **Local development server:** `debug=True` is enabled only when running `python app.py`; GitHub Pages does not host the Flask server.
+- **Static deployment:** published readings and forecasts are snapshots generated by GitHub Actions, not live API responses.
 
 ## Planned enhancements
 
@@ -470,7 +486,7 @@ These are potential future directions, not features currently claimed as impleme
 - Obtain authoritative monitor coordinates and validate station metadata before replacing approximate map references.
 - Improve forecasting with stronger baselines, time-based backtesting, uncertainty intervals, and station-specific error analysis.
 - Add explicit data-versioning and model-artifact management if reproducible offline inference becomes a requirement.
-- Add automated CI checks, monitoring, and a durable database if persistent user-generated data is introduced.
+- Add automated checks for the GitHub Pages build and improve visibility into snapshot freshness.
 - Capture and maintain real desktop and mobile product screenshots.
 
 ## Research and potential impact
